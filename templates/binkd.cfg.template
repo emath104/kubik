@@ -1,0 +1,52 @@
+domain fidonet "\\BinkdFidoPath\\outbound"  2
+domain fido alias-for fidonet
+domain fidonet.org alias-for fidonet
+
+
+address 2:5020/YYY.ZZZ@fidonet
+
+sysname "MyStation"
+location "Moscow, Russia"
+sysop "Vasiliy Pampasov"
+
+nodeinfo 115200,TCP,BINKP
+
+call-delay 5
+rescan-delay 5
+
+try 10
+hold 600
+		
+send-if-pwd
+
+log "\\BinkdFidoPath\\binkd.log"
+loglevel 4
+
+conlog 4
+
+percents
+
+printq
+
+backresolv
+
+inbound "\\BinkdFidoPath\\localinb" 
+inbound-nonsecure "\\BinkdFidoPath\\protinb" 
+
+temp-inbound "\\BinkdFidoPath\\tempinb" 
+
+minfree 2048
+minfree-nonsecure 2048
+
+kill-dup-partial-files
+
+kill-old-partial-files 86400
+
+kill-old-bsy 2400
+
+prescan
+
+	
+node 2:5020/XXX temnenkov.dyndns.org 12345678 c "\\BinkdFidoPath\\2uplink"
+
+# for default node use: defnode -nr -nd -md -

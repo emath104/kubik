@@ -1,0 +1,91 @@
+# sample fido config file
+
+version 0.14 
+Name MyStation 
+Location Moscow, Russia
+Sysop Vasiliy Pampasov
+
+LogLevels 456789
+
+Address 2:5020/YYY.ZZZ
+
+Unpack  "\KubikPath\husky\unzip  -j -Loqq $a -d $p" 0 504b0304
+Pack  zip \KubikPath\husky\zip -9 -j -q $a $f
+Unpack  "\KubikPath\husky\unrar e -y -c- -inul $a $p $f"   0 52617221
+
+Link Kirill Temnenkov
+Aka 2:5020/XXX
+ourAka 2:5020/YYY.ZZZ
+Password 12345678
+EchoMailFlavour Crash
+AutoAreaCreate on
+AutoAreaCreateDefaults -p 14 -dupeCheck move -dupeHistory 11
+AutoFileCreate on
+forwardRequests on
+Packer zip
+
+route crash 2:5020/XXX *
+
+Inbound		\FidoPath\inbound
+ProtInbound     \FidoPath\protinb
+LocalInbound    \FidoPath\localinb
+Outbound	\FidoPath\outbound
+tempOutbound    \FidoPath\tempoutb
+tempInbound     \FidoPath\tempinb
+MsgBaseDir      \FidoPath\msgbasedir
+FileAreaBaseDir \FidoPath\filebox
+
+public		\FidoPath\public
+
+echotosslog     \FidoPath\echotoss.log
+importlog       \FidoPath\import.log
+
+logFileDir      \FidoPath\
+DupeHistoryDir	\FidoPath\msgbasedir
+NodelistDir	\FidoPath\nodelist
+PassFileAreaDir \FidoPath\filebox
+magic		\FidoPath\magic
+lockfile        \FidoPath\flags\lock
+
+AreafixReportsAttr loc pvt k/s npd dir
+FilefixReportsAttr loc pvt k/s npd dir
+
+NodeList nodelist
+
+NetmailArea NetmailArea \FidoPath\netmailarea -b msg -d "Моя частная почта"
+BadArea     BadArea     \FidoPath\badarea -b msg -d "Отбракованные письма"
+DupeArea    DupeArea    \FidoPath\dupearea -b Squish -d "Дублированные письма"
+dupebasetype	HashDupes
+areasmaxdupeage	20
+
+
+LocalArea Memories      \FidoPath\MEMORIES -b Squish -d "Самое интересное"
+LocalArea CarbonArea      \FidoPath\carbonarea -b Squish -d "Письма для меня в эхах"
+CarbonTo Vasiliy Pampasov
+CarbonCopy CarbonArea
+
+
+if "[module]"=="htick"
+
+AnnounceSpool		\FidoPath\announce
+FileFixFromName		FileFix
+
+ConvertLongNames	DontTouch
+FileDescName		file_id.diz
+FileAreaCreatePerms	0755
+FileDescPos		13
+
+
+AnnAreaTag	NetmailArea
+AnnInclude	*
+AnnTo		Vasiliy Pampasov
+AnnFrom		HTick Robot
+AnnSubj		New files!
+AnnAddrFrom	2:5020/YYY.ZZZ
+AnnAddrTo	2:5020/YYY.ZZZ
+AnnOrigin	Бездумный робот htick
+
+endif
+
+LogEchoToScreen
+#LogEchoToScreen

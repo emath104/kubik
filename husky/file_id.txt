@@ -1,0 +1,8 @@
+http://sourceforge.net/projects/husky/files/husky/1.4-RC7/
+
+HUSKY 1.4-RC7 31.03.2012
+husky-all-1.4RC7-w32mingw_20120331.7z
+Win32 executables, documentation and
+examples. Compiled by Stas Degteff
+2:5080/102@fidonet using GNU C
+(MinGW Cygwin special)

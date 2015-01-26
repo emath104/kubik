@@ -1,0 +1,3 @@
+@echo off
+mode con lines=32
+\KubikPath\GoldED+1.1.5\gedldr.exe \KubikPath\GoldED+1.1.5\gedcyg.exe

@@ -57,7 +57,7 @@
 //           Версия для New Point Express     : Egor Glukhov
 //                                               <kaman@rndfido.net.ru>
 //                                               2:5061/120
-//           Доработано для Kubik_Next 2.x    : Evgenii Maletin
+//           Доработано для Kubik 3.1    	  : Evgenii Maletin
 //                                               2:5020/2140.140
 //
 //////////////////////////////////////////////////////////////////////
@@ -1197,7 +1197,7 @@ ColorSet Detect     ; Авто определение.
 ;ColorSet Mono      ; Стандартный монохромный цвет.
 
 // Подключить файл с цветовыми настройками.
-Include \KubikPath\GoldED+1.1.5\colors\gedcol11.cfg
+;Include \KubikPath\GoldED+1.1.5\colors\gedcol11.cfg
 
 // ColorName <name/address> <color>
 // Этим можно назначить особый цвет для некоторых имен и/или адресов.
@@ -1207,52 +1207,41 @@ Include \KubikPath\GoldED+1.1.5\colors\gedcol11.cfg
 ----------------------------------------------------------------------
 -- ПРОВЕРКА ОРФОГРАФИИ
 
+// Таблицы перекодировки CP866 и KOI8-R.
+XLATPATH \KubikPath\GoldED+1.1.5\xlat
+XLATCHARSET KOI8-R       CP866        koi_866.chs
+XLATCHARSET CP866        KOI8-R       866_koi.chs
+
 // SCheckerEnabled <No/Auto>
 // Отключение или включение проверки орфографии. По умолчанию выключено.
-
-// SCheckerDefLang <lang code>
-// Язык по умолчанию.
-// Для Microsoft Spellchecker указывается цифровой код языка (американский
-// английский - 1033, русский - 1049, остальные смотрите в документации
-// Microsoft).
-// Для MySpell указывается название словаря, регистрозависимое (имя файла без
-// суффикса .dic или .aff).
-
-// SCheckerUserDic <MS Spell user dictionnary filename>
-// Имя файла пользовательского словаря, используется только в Microsoft
-// Spellchecker, игноригуется в MySpell.
-
-// SCheckerDicPath <MySpell dictionaries directory>
-// Каталог со словарями MySpell, игноригуется в Microsoft Spellchecker.
+SCheckerEnabled Auto
 
 // COLOR SCHECKER ERROR <color>
-// Цвет выделения ошибок при проверке орфографии. Должно располагаться после
-// директивы INTENSECOLORS.
+// Цвет выделения ошибок при проверке орфографии. Должно располагаться после директивы INTENSECOLORS.
 // Значение по умолчанию: White on Black (белые буквы на чёрном фоне).
+// (при подключении стороннего файла с цветовыми настройками (gedcolor.cfg) эта строка должна должна быть именно в нём.
+Color Schecker  Error   LRed   on Blue
 
-IF SPELL
+SCheckerDefLang ru
 
-SCheckerEnabled No              ; выключить
-;SCheckerEnabled Auto            ; проверять во время набора
+// Путь до словарей.
+SCheckerDicPath \KubikPath\GoldED+1.1.5\dict
 
-;SCheckerDefLang 1049            ; MSSPELL, Русский
-;SCheckerDefLang 1033            ; MSSPELL, Английский (американский диалект)
-;SCheckerDefLang ru_RU_yo        ; MYSPELL, Русский с буквой ё и аббревиатурами
-;SCheckerDefLang ru_RU_ye        ; MYSPELL, Русский с буквой е и словоформами
-;SCheckerDefLang ru_RU           ; MYSPELL, Русский с аббревиатурами
-;SCheckerDefLang en_US           ; MYSPELL, Английский (американский диалект)
+----------------------------------------------------------------------
+-- ПРОВЕРКА ОРФОГРАФИИ
 
-// используется только для MSSPELL
-;SCheckerUserDic "user.dic"
-// используется только для MYSPELL
-//  windows с установленным openoffice
-;SCheckerDicPath "C:\Program Files\OpenOffice.org 2.0\share\dict\ooo\"
-//  linux, BSD, ...
-;SCheckerDicPath /usr/share/myspell/dicts
+//Таблицы перекодировки CP866 и KOI8-R.
+XLATPATH \KubikPath\GoldED+1.1.5\xlat
+XLATCHARSET KOI8-R       CP866        koi_866.chs
+XLATCHARSET CP866        KOI8-R       866_koi.chs
 
-;COLOR SCHECKER ERROR White on Black
+// Для выключения спеллчекера заменить Auto на No
+SCheckerEnabled Auto
 
-ENDIF
+SCheckerDefLang ru
+SCheckerDicPath \KubikPath\GoldED+1.1.5\dict
+
+
 
 ----------------------------------------------------------------------
 -- ВНЕШНИЕ УТИЛИТЫ

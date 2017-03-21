@@ -1,12 +1,36 @@
-; Kubik Send. Компонент для Кубик Модерн.
-; Версия 1 Билд 7
-; (С) 2012 ЕМ140 для Kubik Project.
-; Пурик Бейсиковый 4,51 \ 4,61.
+; Kubik Send. Программа для последовательного запуска тоссера/мейлера (отправки и приёма почты).
+; Версия 1.1
+; (С) 2012-2016 ragweed
+; PureBasic 5.31
+
+; Смотри описание для параметров "-a" и "--auto_send".
+Global AutoSend = 0
+
+; Проверяем наличие параметров, переданных при запуске Kubik Send.
+For i=0 To CountProgramParameters() - 1
+  Select ProgramParameter()
+    Case "-a", "--auto_send"
+      ; Этот параметр заставляет Kubik Send:
+      ; * Не отображать приветствие и прощание
+      ; * Начинать проверку почты без задержки (игнорирование Config/Send/STime)
+      ; * Завершение работы сразу после проверки почты (игнорирование Config/Send/Сlose)
+      AutoSend = 1
+  EndSelect
+Next
 
 IncludeFile "Kubik_Include_CFGS.pb"
 
+; Задержка Config/Send/STime миллисекунд.
+Procedure DelaySTime()
+  If AutoSend <> 1
+    Delay(stime)
+  EndIf
+EndProcedure
+
 Procedure PrintText(color,text.s, defaultcolor)
-  ConsoleColor(color,0) : PrintN(text) : ConsoleColor(defaultcolor,0)
+  ConsoleColor(color, 0)
+  PrintN(text)
+  ConsoleColor(defaultcolor, 0)
 EndProcedure
 
 OpenConsole()
@@ -15,12 +39,14 @@ Path$ = GetCurrentDirectory()
 
 KubikSetting("Read")
 
-PrintText(14,"Kubik Send | Љ®¬Ї®­Ґ­в Kubik Modern.", textcolor)
-PrintText(14,"ЋвЇа ўЄ  Ё ЇаЁс¬ дЁ¤®и­®© Ї®звл.", textcolor)
-PrintText(15,"(C) Kubik Project 2012", textcolor)
-Delay(stime) 
+If AutoSend <> 1
+  PrintText(14,"Kubik Send | ЋвЇа ўЄ  Ё ЇаЁс¬ дЁ¤®и­®© Ї®звл.", textcolor)
+  PrintText(15,"(C) Kubik Project 2016", textcolor)
+  DelaySTime()
+EndIf
 
-; Автор - 22vlad ; Модификация - EM140 для Kubik Project ; http://purebasic.info/phpBB2/viewtopic.php?t=411
+; Автор изначального варианта - 22vlad
+; Взято здесь: http://purebasic.info/phpBB2/viewtopic.php?t=411
 Global Dim programs.l(100,100)
 NewList l.s() ; Создаем лист, где будем хранить каждую строчку исходного кода 
 
@@ -30,7 +56,10 @@ Repeat
   l.s()=ReadString(0) 
 Until Eof(0) 
 CloseFile(0) 
-Else : PrintText(4,"”Ђ’Ђ‹њЌЂџ Ћ€ЃЉЂ>>Џа®ўҐавҐ Є®­дЁЈга жЁ®­­лҐ д ©«л Їа®Ја ¬¬л!!!", textcolor) : Delay(stime) : End
+Else
+  PrintText(4,"”Ђ’Ђ‹њЌЂџ Ћ€ЃЉЂ>>Џа®ўҐавҐ Є®­дЁЈга жЁ®­­лҐ д ©«л Їа®Ја ¬¬л!!!", textcolor)
+  DelaySTime()
+  End
 EndIf
 
 ; первый проход: ищем теги программ 
@@ -51,13 +80,18 @@ Next i
 
 ; проверка правильности расположения тегов
 ;If countWin=0 : MessageRequester("Error 0","Программа не имеет ни одного тега: выход") : End : EndIf 
-If countWin=0 : PrintText(4,"”Ђ’Ђ‹њЌЂџ Ћ€ЃЉЂ>>Џа®ўҐавҐ Є®­дЁЈга жЁ®­­лҐ д ©«л Їа®Ја ¬¬л!!!", textcolor) : Delay(stime) : End : EndIf 
+If countWin=0
+  PrintText(4,"”Ђ’Ђ‹њЌЂџ Ћ€ЃЉЂ>>Џа®ўҐавҐ Є®­дЁЈга жЁ®­­лҐ д ©«л Їа®Ја ¬¬л!!!", textcolor)
+  DelaySTime()
+  End
+EndIf 
 
 For i=1 To countWin 
   ;Debug Str(programs(i,0))+"   "+Str(programs(0,i)) 
   If programs(0,i)<programs(i,0) 
-   ;MessageRequester("Error 1","Проверьте правильность тегов <runprogram></runprogram>: выход") : End 
-    PrintText(4,"Џа®ўҐамвҐ Їа ўЁ«м­®бвм вҐЈ®ў <runprogram></runprogram>!!!", textcolor) : Delay(stime) : End 
+    PrintText(4,"Џа®ўҐамвҐ Їа ўЁ«м­®бвм вҐЈ®ў <runprogram></runprogram>!!!", textcolor)
+    DelaySTime()
+    End 
   EndIf 
 Next i 
 
@@ -91,43 +125,38 @@ For i=1 To countWin
   Result = RunProgram(Filename$, Parameter$, WorkingDirectory$, #PB_Program_Wait)
 Next i
 
-PrintText(15,"ЋвЇа ўЄ  § ўҐаиҐ­ .", 0)
- 
-If close=1
-   ctimes.s=Str(ctime)
-   Length=Len(ctimes)-3
-   ctimes=Left(ctimes,Length)
-   PrintText(15,"ЋЄ­® § Єа®Ґвбп  ўв®¬ вЁзҐбЄЁ зҐаҐ§ "+ctimes+" бҐЄ.", textcolor)
-   Delay(ctime)
-   CloseConsole()
-Else
-   PrintText(15,"Ќ ¦¬ЁвҐ ENTER, зв®Ўл ўл©вЁ.", textcolor)
-   Input()
-   CloseConsole()
+If AutoSend <> 1
+  PrintText(15,"ЋвЇа ўЄ  § ўҐаиҐ­ .", 0)
+  
+  If close=1
+     ctimes.s=Str(ctime)
+     Length=Len(ctimes)-3
+     ctimes=Left(ctimes,Length)
+     PrintText(15,"ЋЄ­® § Єа®Ґвбп  ўв®¬ вЁзҐбЄЁ зҐаҐ§ "+ctimes+" бҐЄ.", textcolor)
+     DelaySTime()
+     CloseConsole()
+  Else
+     PrintText(15,"Ќ ¦¬ЁвҐ ENTER, зв®Ўл ўл©вЁ.", textcolor)
+     Input()
+     CloseConsole()
+  EndIf
 EndIf
-End 
-; IDE Options = PureBasic 5.30 (Windows - x86)
+; IDE Options = PureBasic 5.31 (Windows - x86)
 ; ExecutableFormat = Console
-; CursorPosition = 1
-; Folding = +
+; CursorPosition = 38
+; Folding = -
 ; EnableXP
 ; UseIcon = icons\32x32\send.ico
 ; Executable = Kubik_Send.exe
+; CommandLine = -a
 ; IncludeVersionInfo
-; VersionField0 = 1,0,0,7
-; VersionField1 = 1,0,0,7
+; VersionField0 = 1,1,0,0
+; VersionField1 = 1,1,0,0
 ; VersionField2 = Kubik Project
 ; VersionField3 = Kubik
-; VersionField4 = 1
-; VersionField5 = 1
-; VersionField6 = РљРѕРјРїРѕРЅРµРЅС‚ Kubik Modern
+; VersionField4 = 1,1
 ; VersionField7 = Kubik Send
 ; VersionField8 = Kubik_Send.exe
-; VersionField9 = (РЎ) 2012 Kubik Project
-; VersionField13 = de.j.rabbit@gmail.com
+; VersionField9 = (C) 2016 Kubik Project
 ; VersionField14 = http://kubik-fido.blogspot.com/
 ; VersionField17 = 0419 Russian
-; VersionField18 = Fido:
-; VersionField19 = Blog
-; VersionField21 = 2:5020/2140.140
-; VersionField22 = http://kubik-fido.blogspot.com/

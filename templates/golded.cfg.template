@@ -66,11 +66,11 @@
 -- ИМЯ И АДРЕСА
 
 // Ваше имя и прозвища (различные написания).
-UserName Vasiliy Pampasov
+UserName %FULL_NAME%
 ;UserName Winnie Cooler
 
 // Ваши FTN адреса и AKA (Also Known As - так же известен как).
-Address  2:5020/YYY.ZZZ            ; Основной адрес узла.
+Address  %POINT_FTN_ADDRESS%            ; Основной адрес узла.
 ;AKA     2:5063/77.1              ; AKA.
 ;AKA     2:5063/77@fidonet.org  ; Поинтовый адрес с доменом ("5D").
 
@@ -82,7 +82,7 @@ Address  2:5020/YYY.ZZZ            ; Основной адрес узла.
 NodelistWarn No
 
 // Путь к нодлистам.
-NodePath \FidoPath\nodelist
+NodePath \FIDO_PATH\nodelist
 
 // Имена файлов нодлистов.
 // Расширение ".*" или ".999" означает выбор самого нового файла.
@@ -250,7 +250,7 @@ ViewQuote Yes   ; Показывать всё.
 -- ПРОСМОТР СООБЩЕНИЙ (ЗАПИСЬ В ФАЙЛ)
 
 // Имя файла или каталога по умолчанию, для записи в файл сообщения по Alt-W.
-OutputFile \FidoPath\outfile
+OutputFile \FIDO_PATH\outfile
 
 // Вставлять ли символ Form Feed (0x0c) между письмами при
 // сохранении в файл (по умолчанию No).
@@ -269,7 +269,7 @@ FORMFEEDSEPARATOR No
 UserListFile golduser.lst
 
 // Путь, куда GoldED будет декодировать файлы, кодированные в UUE.
-UuDecodePath \FidoPath\uudecode
+UuDecodePath \FIDO_PATH\uudecode
 
 // ADDRESSBOOKADD <No/Yes/Always>
 // При ответах на письма автоматически добавлять адресатов в адресную книгу.
@@ -374,15 +374,15 @@ AreaFreqTo NetMail
 
 // Путь к файлу files.bbs, который будет там автоматически создаваться
 // с описаниями запрашиваемых файлов.
-InboundPath \FidoPath\Inbound\
+InboundPath \FIDO_PATH\Inbound\
 
 // Путь по умолчанию для "подклеенных" файлов.
-AttachPath \FidoPath\Inbound\
+AttachPath \FIDO_PATH\Inbound\
 
 // Путь к Binkley-style outbound. В настоящее время используется для
 // WaZOO файловых запросов.
 // Это должен быть путь к основному Outbound без расширений.
-OutboundPath \FidoPath\Outbound
+OutboundPath \FIDO_PATH\Outbound
 
 ----------------------------------------------------------------------
 -- КОПИРОВАНИЕ/ПЕРЕМЕЩЕНИЕ/ОТВЕТЫ
@@ -655,7 +655,7 @@ WriteHeader Yes
 -- ШАБЛОНЫ (MESSAGE TEMPLATES)
 
 // Путь к шаблонам. По умолчанию соответствует GoldPath.
-TemplatePath	\KubikPath\GoldED+1.1.5
+TemplatePath	\KUBIK_PATH\GoldED+1.1.5
 
 // Использовать ли формат сохраняемого сообщения принятый
 // во встроенном в редактор шаблоне  или брать из внешнего?
@@ -1054,7 +1054,7 @@ COLOR STYLECODE RBIU    Black    on White    ; _/*#ReverseItalicUnderline#*/_
 -- КОНФИГУРАЦИЯ ДИСКОВОЙ И ОПЕРАЦИОННОЙ СИСТЕМЫ
 
 // Путь к файлам GoldED'а. По умолчанию - где находится golded.cfg.
-GoldPath \KubikPath\GoldED+1.1.5
+GoldPath \KUBIK_PATH\GoldED+1.1.5
 
 // Путь, где GoldNode сможет поместить большой временный файл.
 // По умолчанию соответствует GoldPath.
@@ -1067,13 +1067,13 @@ DosPrompt Yes
 -- ЛОГ ФАЙЛ
 
 // Имя лога.
-LogFile \FidoPath\golded.log
+LogFile \FIDO_PATH\golded.log
 
 // Формат лога. <Fd,Max,Bink,Qbbs,Db>
 LogFormat Fd
 
-SEMAPHORE EXPORTLIST \FidoPath\echotoss.log
-SEMAPHORE IMPORTLIST \FidoPath\import.log
+SEMAPHORE EXPORTLIST \FIDO_PATH\echotoss.log
+SEMAPHORE IMPORTLIST \FIDO_PATH\import.log
 
 ----------------------------------------------------------------------
 -- ЗВУКОВАЯ ПОДДЕРЖКА
@@ -1197,7 +1197,7 @@ ColorSet Detect     ; Авто определение.
 ;ColorSet Mono      ; Стандартный монохромный цвет.
 
 // Подключить файл с цветовыми настройками.
-;Include \KubikPath\GoldED+1.1.5\colors\gedcol11.cfg
+;Include \KUBIK_PATH\GoldED+1.1.5\colors\gedcol11.cfg
 
 // ColorName <name/address> <color>
 // Этим можно назначить особый цвет для некоторых имен и/или адресов.
@@ -1208,7 +1208,7 @@ ColorSet Detect     ; Авто определение.
 -- ПРОВЕРКА ОРФОГРАФИИ
 
 // Таблицы перекодировки CP866 и KOI8-R.
-XLATPATH \KubikPath\GoldED+1.1.5\xlat
+XLATPATH \KUBIK_PATH\GoldED+1.1.5\xlat
 XLATCHARSET KOI8-R       CP866        koi_866.chs
 XLATCHARSET CP866        KOI8-R       866_koi.chs
 
@@ -1225,13 +1225,13 @@ Color Schecker  Error   LRed   on Blue
 SCheckerDefLang ru
 
 // Путь до словарей.
-SCheckerDicPath \KubikPath\GoldED+1.1.5\dict
+SCheckerDicPath \KUBIK_PATH\GoldED+1.1.5\dict
 
 ----------------------------------------------------------------------
 -- ПРОВЕРКА ОРФОГРАФИИ
 
 //Таблицы перекодировки CP866 и KOI8-R.
-XLATPATH \KubikPath\GoldED+1.1.5\xlat
+XLATPATH \KUBIK_PATH\GoldED+1.1.5\xlat
 XLATCHARSET KOI8-R       CP866        koi_866.chs
 XLATCHARSET CP866        KOI8-R       866_koi.chs
 
@@ -1239,7 +1239,7 @@ XLATCHARSET CP866        KOI8-R       866_koi.chs
 SCheckerEnabled Auto
 
 SCheckerDefLang ru
-SCheckerDicPath \KubikPath\GoldED+1.1.5\dict
+SCheckerDicPath \KUBIK_PATH\GoldED+1.1.5\dict
 
 
 
@@ -1385,7 +1385,7 @@ FidoUserNo  0      ; Использовать 0-ой указатель.
 // GoldED не использует Squish MSGAPI в любом случае.
 ;SquishScan Quick      ; Сканировать основываясь только на *.sqi файлах.
 SquishScan API       ; Проверять так же *.sqd файлы. Медленнее.
-INCLUDE \KubikPath\GoldED+1.1.5\goldcmnt.CFG
+INCLUDE \KUBIK_PATH\GoldED+1.1.5\goldcmnt.CFG
 
 // Установка номера записи (по умолчанию 0) в файле с указателями на
 // последнее прочитанное письмо, для многопользовательской базы сообщений.
@@ -1412,13 +1412,13 @@ Semaphore EchoScan   C:\FIDO\TM\FLAGS\ECHOSCAN.T-M
 
 // Имя файла, содержащего список областей, куда вы писали
 // сообщения, которые следует просканировать эхопроцессору.
-Semaphore ExportList \FidoPath\echotoss.log
+Semaphore ExportList \FIDO_PATH\echotoss.log
 
 // GoldED умеет выделять области с новой почтой, используя этот файл.
 // Раскомментиpуйте/подпpавте один из пpимеров, если хотите использовать
 // эту особенность. Не имеет смысла, если всегда сканируются
 // все области (AREASCAN *).
-Semaphore ImportList \FidoPath\import.log ; Этот файл создает FastEcho.
+Semaphore ImportList \FIDO_PATH\import.log ; Этот файл создает FastEcho.
 
 // Флаги - файлы нулевой длины, по возникновению которых следует
 // запустить определённый процесс.
@@ -1606,10 +1606,10 @@ AreaReadOnly Soft     ; Предупредить.
 --  ПОДКЛЮЧЕНИЕ ОПИСАНИЯ БАЗ СООБЩЕНИЙ ИЗ НАСТРОЕК ЭХОПРОЦЕССОРОВ
 
 // Путь по умолчанию для AreaFile и флагов.
-;AreaPath \FidoPath\msgbasedir
+;AreaPath \FIDO_PATH\msgbasedir
 
 // GoldED может брать настройки из многих других программ.
-AREAFILE Fidoconfig   \KubikPath\husky\husky.cfg        ; HPT конфиг
+AREAFILE Fidoconfig   \KUBIK_PATH\husky\husky.cfg        ; HPT конфиг
 ;AREAFILE Fidoconfig ; HPT Используя имя файла из переменной окружения FIDOCONFIG
 
 ----------------------------------------------------------------------
@@ -1650,7 +1650,7 @@ AREAFILE Fidoconfig   \KubikPath\husky\husky.cfg        ; HPT конфиг
 // командная_стpока - путь и имя аpхиватоpа, c опцией "pазаpхивиpовать",
 // для указанного pасшиpения;
 // @file - токен, подставляющий имя файла упакованной базы.
-UNPACKER zip "\KubikPath\husky\unzip -e @file"
+UNPACKER zip "\KUBIK_PATH\husky\unzip -e @file"
 
 ----------------------------------------------------------------------
 -- РАЗЛИЧНЫЕ ИНДИВИДУАЛЬНЫЕ УСТАНОВКИ ДЛЯ ОПРЕДЕЛЁННЫХ ОБЛАСТЕЙ

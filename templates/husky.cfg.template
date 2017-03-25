@@ -1,22 +1,22 @@
 # sample fido config file
 
 version 0.14 
-Name MyStation 
-Location Moscow, Russia
-Sysop Vasiliy Pampasov
+Name %STATION_NAME% 
+Location %LOCATION%
+Sysop %FULL_NAME%
 
 LogLevels 456789
 
-Address 2:5020/YYY.ZZZ
+Address %POINT_FTN_ADDRESS%
 
-Unpack  "\KubikPath\husky\unzip  -j -Loqq $a -d $p" 0 504b0304
-Pack  zip \KubikPath\husky\zip -9 -j -q $a $f
-Unpack  "\KubikPath\husky\unrar e -y -c- -inul $a $p $f"   0 52617221
+Unpack  "\KUBIK_PATH\husky\unzip  -j -Loqq $a -d $p" 0 504b0304
+Pack  zip \KUBIK_PATH\husky\zip -9 -j -q $a $f
+Unpack  "\KUBIK_PATH\husky\unrar e -y -c- -inul $a $p $f"   0 52617221
 
-Link Kirill Temnenkov
-Aka 2:5020/XXX
-ourAka 2:5020/YYY.ZZZ
-Password 12345678
+Link %UPLINK_NAME%
+Aka %BOSS_FTN_ADDRESS%
+ourAka %POINT_FTN_ADDRESS%
+Password %PASSWORD%
 EchoMailFlavour Crash
 AutoAreaCreate on
 AutoAreaCreateDefaults -p 14 -dupeCheck move -dupeHistory 11
@@ -24,50 +24,50 @@ AutoFileCreate on
 forwardRequests on
 Packer zip
 
-route crash 2:5020/XXX *
+route crash %BOSS_FTN_ADDRESS% *
 
-Inbound		\FidoPath\inbound
-ProtInbound     \FidoPath\protinb
-LocalInbound    \FidoPath\localinb
-Outbound	\FidoPath\outbound
-tempOutbound    \FidoPath\tempoutb
-tempInbound     \FidoPath\tempinb
-MsgBaseDir      \FidoPath\msgbasedir
-FileAreaBaseDir \FidoPath\filebox
+Inbound		\FIDO_PATH\inbound
+ProtInbound     \FIDO_PATH\protinb
+LocalInbound    \FIDO_PATH\localinb
+Outbound	\FIDO_PATH\outbound
+tempOutbound    \FIDO_PATH\tempoutb
+tempInbound     \FIDO_PATH\tempinb
+MsgBaseDir      \FIDO_PATH\msgbasedir
+FileAreaBaseDir \FIDO_PATH\filebox
 
-public		\FidoPath\public
+public		\FIDO_PATH\public
 
-echotosslog     \FidoPath\echotoss.log
-importlog       \FidoPath\import.log
+echotosslog     \FIDO_PATH\echotoss.log
+importlog       \FIDO_PATH\import.log
 
-logFileDir      \FidoPath\
-DupeHistoryDir	\FidoPath\msgbasedir
-NodelistDir	\FidoPath\nodelist
-PassFileAreaDir \FidoPath\filebox
-magic		\FidoPath\magic
-lockfile        \FidoPath\flags\lock
+logFileDir      \FIDO_PATH\
+DupeHistoryDir	\FIDO_PATH\msgbasedir
+NodelistDir	\FIDO_PATH\nodelist
+PassFileAreaDir \FIDO_PATH\filebox
+magic		\FIDO_PATH\magic
+lockfile        \FIDO_PATH\flags\lock
 
 AreafixReportsAttr loc pvt k/s npd dir
 FilefixReportsAttr loc pvt k/s npd dir
 
 NodeList nodelist
 
-NetmailArea NetmailArea \FidoPath\netmailarea -b msg -d "Моя частная почта"
-BadArea     BadArea     \FidoPath\badarea -b msg -d "Отбракованные письма"
-DupeArea    DupeArea    \FidoPath\dupearea -b Squish -d "Дублированные письма"
+NetmailArea NetmailArea \FIDO_PATH\netmailarea -b msg -d "Моя частная почта"
+BadArea     BadArea     \FIDO_PATH\badarea -b msg -d "Отбракованные письма"
+DupeArea    DupeArea    \FIDO_PATH\dupearea -b Squish -d "Дублированные письма"
 dupebasetype	HashDupes
 areasmaxdupeage	20
 
 
-LocalArea Memories      \FidoPath\MEMORIES -b Squish -d "Самое интересное"
-LocalArea CarbonArea      \FidoPath\carbonarea -b Squish -d "Письма для меня в эхах"
-CarbonTo Vasiliy Pampasov
+LocalArea Memories      \FIDO_PATH\MEMORIES -b Squish -d "Самое интересное"
+LocalArea CarbonArea      \FIDO_PATH\carbonarea -b Squish -d "Письма для меня в эхах"
+CarbonTo %FULL_NAME%
 CarbonCopy CarbonArea
 
 
 if "[module]"=="htick"
 
-AnnounceSpool		\FidoPath\announce
+AnnounceSpool		\FIDO_PATH\announce
 FileFixFromName		FileFix
 
 ConvertLongNames	DontTouch
@@ -78,11 +78,11 @@ FileDescPos		13
 
 AnnAreaTag	NetmailArea
 AnnInclude	*
-AnnTo		Vasiliy Pampasov
+AnnTo		%FULL_NAME%
 AnnFrom		HTick Robot
 AnnSubj		New files!
-AnnAddrFrom	2:5020/YYY.ZZZ
-AnnAddrTo	2:5020/YYY.ZZZ
+AnnAddrFrom	%POINT_FTN_ADDRESS%
+AnnAddrTo	%POINT_FTN_ADDRESS%
 AnnOrigin	Бездумный робот htick
 
 endif

@@ -1,13 +1,13 @@
-domain fidonet "\\BinkdFidoPath\\outbound"  2
+domain fidonet "\\BINKD_FIDO_PATH\\outbound"  2
 domain fido alias-for fidonet
 domain fidonet.org alias-for fidonet
 
 
-address 2:5020/YYY.ZZZ@fidonet
+address %POINT_FTN_ADDRESS%@fidonet
 
-sysname "MyStation"
-location "Moscow, Russia"
-sysop "Vasiliy Pampasov"
+sysname "%STATION_NAME%"
+location "%LOCATION%"
+sysop "%FULL_NAME%"
 
 nodeinfo 115200,TCP,BINKP
 
@@ -19,7 +19,7 @@ hold 600
 		
 send-if-pwd
 
-log "\\BinkdFidoPath\\binkd.log"
+log "\\BINKD_FIDO_PATH\\binkd.log"
 loglevel 4
 
 conlog 4
@@ -30,10 +30,10 @@ printq
 
 backresolv
 
-inbound "\\BinkdFidoPath\\localinb" 
-inbound-nonsecure "\\BinkdFidoPath\\protinb" 
+inbound "\\BINKD_FIDO_PATH\\localinb" 
+inbound-nonsecure "\\BINKD_FIDO_PATH\\protinb" 
 
-temp-inbound "\\BinkdFidoPath\\tempinb" 
+temp-inbound "\\BINKD_FIDO_PATH\\tempinb" 
 
 minfree 2048
 minfree-nonsecure 2048
@@ -47,6 +47,6 @@ kill-old-bsy 2400
 prescan
 
 	
-node 2:5020/XXX temnenkov.dyndns.org 12345678 c "\\BinkdFidoPath\\2uplink"
+node %BOSS_FTN_ADDRESS% %SERVER_NAME% %PASSWORD% c "\\BINKD_FIDO_PATH\\2uplink"
 
 # for default node use: defnode -nr -nd -md -

@@ -1,7 +1,7 @@
 <runprogram name="HTP scan pack" path="husky\hpt.exe" parameter="-c husky.cfg scan pack" directory="husky\" />
 </runprogram>
 
-<runprogram name="BINKD -cp -P2:5020/XXX" path="binkd\binkd.exe" parameter="-cp -P2:5020/XXX binkd.cfg" directory="binkd\" />
+<runprogram name="BINKD -cp -P%BOSS_FTN_ADDRESS%" path="binkd\binkd.exe" parameter="-cp -P%BOSS_FTN_ADDRESS% binkd.cfg" directory="binkd\" />
 </runprogram>
 
 <runprogram name="HTICK toss" path="husky\htick.exe" parameter="-c husky.cfg toss" directory="husky\" />

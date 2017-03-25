@@ -9,12 +9,12 @@ NormPos(1440x900)=432,184,1007,715
 NormPos=229,114,804,652
 Users_ItemIndex=0
 FtnAddr_ItemIndex=0
-RealName_Text=Vasiliy Pampasov
+RealName_Text=%FULL_NAME%
 BBToss_Checked=FALSE
 HPT_Checked=TRUE
-TosserConfig_Text=\KubikPath\husky\husky.cfg
+TosserConfig_Text=\KUBIK_PATH\husky\husky.cfg
 Tagline_Text= 
-Tearline_Text=@LongPID @Version (Kubik 3,0)
+Tearline_Text=@LongPID @Version (Kubik 3.1)
 Origin_Text=В начале было слово. В конце будет ориджин.(С)
 EEchomailFlag_Text=
 ENetmailFlag_Text=
@@ -227,11 +227,11 @@ TextFontSize=14
 
 [SetupForm\Users_Items]
 Count=1
-Item0=Vasiliy Pampasov
+Item0=%FULL_NAME%
 
 [SetupForm\FtnAddr_Items]
 Count=1
-Item0=2:5020/YYY.ZZZ
+Item0=%POINT_FTN_ADDRESS%
 
 [SetupForm\Template_Lines]
 Count=20
@@ -264,7 +264,7 @@ Count=0
 
 [SetupForm\Nodelists_Items]
 Count=1
-Item0=\FidoPath\nodelist\NODELIST.321
+Item0=\FIDO_PATH\nodelist\NODELIST.321
 
 [SetupForm\Pointlists_Items]
 Count=0

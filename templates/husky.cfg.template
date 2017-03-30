@@ -89,3 +89,4 @@ endif
 
 LogEchoToScreen
 #LogEchoToScreen
+%HUSKY_AREAS_INFO%

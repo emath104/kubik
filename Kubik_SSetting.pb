@@ -1,5 +1,5 @@
 ; Kubik SSetting. Автоматизация процесса настройки конф. файлов входящих в поинт-комплект Kubik приложений.
-; Версия 4
+; Версия 4.1
 ; (С) 2012-2017 ragweed
 ; PureBasic 5.31
 
@@ -42,6 +42,9 @@ EndEnumeration
 ; Смотри описание для параметров "-a", "--auto-setting".
 Global AutoSet = 0
 Global BackupFolder.s
+
+; Описание арий из конфига husky.cfg
+Global AreasInfo.s
 
 ;}
 
@@ -469,6 +472,9 @@ Procedure CreateConfigFromTemplate(template.s, path.s)
           text.s = ReplaceString(text.s, "\FIDO_PATH\",          FidoShortPath.s)
           text.s = ReplaceString(text.s, "\\BINKD_FIDO_PATH\\",  ReplaceString(FidoShortPath.s, "\", "\\"))
         EndWith
+        
+        text.s = ReplaceString(text.s, "%HUSKY_AREAS_INFO%", AreasInfo.s)
+        text.s = ReplaceString(text.s, "%KUBIK_VERSION%", #Kubik_Version)
 
         FileSeek(0,0)
         TruncateFile(0)
@@ -529,6 +535,30 @@ Procedure CreateConfigsFromTemplates()
   
 EndProcedure
 
+; Возращает описание арий из конфига husky.cfg
+; Иначе - пустая строка
+Procedure.s GetAreasInfo(husky_cfg_path.s)
+  ; Открываем файл и считываем его содержимое
+  If OpenFile(0, husky_cfg_path.s)
+    size = Lof(0)
+    
+    If size > 0
+      text.s = Space(size)
+      ReadData(0, @text, size)
+      
+      ; Находим и вычленяем описание арий
+      position = FindString(text.s, "EchoArea ")
+      areas_info.s = Mid(text.s, position)
+    EndIf
+    
+    CloseFile(0)
+
+    ProcedureReturn areas_info.s
+  EndIf
+  
+  ProcedureReturn ""
+EndProcedure
+
 ; Сохраняет текущие настройки в Kubik_Set.ini, а также создаёт из шаблонов конфиги для программ 
 ; поинт-комплекта с необходимыми параметрами
 Procedure SaveSetting()
@@ -547,6 +577,9 @@ Procedure SaveSetting()
   
   ; Создаю папку fido\
   CreateFidoFolder(GetCurrentDirectory())
+  
+  ; Считываю описание арий из \husky\husky.cfg
+  AreasInfo.s = GetAreasInfo(GetCurrentDirectory() + "\husky\husky.cfg")
   
   ; Создание конфигурационных файлов для программ поинт-комплекта
   If CreateConfigsFromTemplates()
@@ -574,8 +607,14 @@ Procedure AutoConfiguration()
         Msg("Новый конфиг. файл Kubik_Set.ini успешно создан")
         
         ; Считываю описание арий из BackupFolder.s + "\husky\husky.cfg
-        ;- Ещё не реализованно
-        
+        old_husky_cfg.s = BackupFolder.s + "\husky\husky.cfg"
+        AreasInfo.s = GetAreasInfo(old_husky_cfg.s)
+        If AreasInfo.s <> ""
+          Msg("Скопировал описание областей из '" + old_husky_cfg.s + "'")
+        Else
+          Msg("Отсутствуют или не удалось скопировать описание областей из '" + old_husky_cfg.s + "'")
+        EndIf
+          
         ; Создаю из шаблонов конфигурационные файлы для программ комплекта
         If CreateConfigsFromTemplates()
           Msg("Настройка поинт-комплекта Kubik завершена")
@@ -640,9 +679,9 @@ Repeat
   EndSelect
 Until Event = #PB_Event_CloseWindow
 ; IDE Options = PureBasic 5.11 (Windows - x86)
-; CursorPosition = 450
-; FirstLine = 168
-; Folding = HQ0
+; CursorPosition = 475
+; FirstLine = 82
+; Folding = Fw-
 ; EnableXP
 ; UseIcon = icons\32x32\set.ico
 ; Executable = Kubik_SSetting.exe

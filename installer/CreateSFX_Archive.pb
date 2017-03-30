@@ -22,9 +22,9 @@ EndEnumeration
 Procedure Open_Window_0()
   If OpenWindow(#Window_0, 344, 256, 334, 264, "Создание самораспаковывающего ZIP",#PB_Window_MinimizeGadget|#PB_Window_Invisible|#PB_Window_ScreenCentered)
       TextGadget(#Text_0, 5, 5, 320, 15, "Путь к папке с файлами:")
-      StringGadget(#String_0, 5, 20, 290, 20, "", #PB_String_ReadOnly)
+      StringGadget(#String_0, 5, 20, 290, 20, "E:\kubik-clear\", #PB_String_ReadOnly)
       TextGadget(#Text_1, 5, 55, 320, 15, "Путь к месту сохранения создаваемого архива:")
-      StringGadget(#String_1, 5, 70, 290, 20, "", #PB_String_ReadOnly)
+      StringGadget(#String_1, 5, 70, 290, 20, "E:\kubik-dev\installer\Kubik_3.1.exe", #PB_String_ReadOnly)
       TextGadget(#Text_2, 5, 140, 100, 15, "Обработка файла:")
       TextGadget(#Text_CurrentFiles, 105, 140, 220, 15, "")
       ProgressBarGadget(#ProgressBar_FileProgress, 5, 155, 320, 15, 0, 100, #PB_ProgressBar_Smooth)
@@ -105,11 +105,11 @@ PureZIP_SetProgressionCallback(@All_Progress()) ; Регистрация процедуры общего п
 HideWindow(#Window_0, 0)
 
 
-Repeat ; Главный цикл Repeat - Until
-  Event = WaitWindowEvent() ; Идентификатор события
+Repeat
+  Event = WaitWindowEvent()
   
   If Event = #PB_Event_Gadget
-    Select EventGadget() ; Идентификатор гаджета по которому кликнули
+    Select EventGadget()
       Case #Button_1 ; Кнопка выбора папки с файлами
         Path.s=PathRequester("Укажите путь к архивируемым файлам","")
         If FileSize(Path) = -2 ; Папка существует
@@ -147,9 +147,9 @@ DataSection
   IncludeBinary "SFX.exe"
   SFX_File_End:
 EndDataSection
-; IDE Options = PureBasic 5.30 (Windows - x86)
-; CursorPosition = 20
-; FirstLine = 118
+; IDE Options = PureBasic 5.11 (Windows - x86)
+; CursorPosition = 24
+; FirstLine = 17
 ; Folding = -
 ; EnableXP
 ; Executable = CreateSFX_Archive.exe

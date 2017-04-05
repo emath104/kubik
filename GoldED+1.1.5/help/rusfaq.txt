@@ -1,7 +1,7 @@
 This file mostly duplicates tips.txt but also answers on some russian specific
 questions. The codepage used is cp866. Please read this before asking for
 assistance!
-$Date: 2012/05/19 22:17:31 $
+$Date: 2012/08/26 09:24:23 $
 >==============================================================================
 
                 F.A.Q. по использованию GoldED+ в картинках (tm)
@@ -505,7 +505,7 @@ $Date: 2012/05/19 22:17:31 $
      2.2.1: LC_ALL=ru_RU.KOI8-R konsole --style 1 -e gedlnx
      2.2.2: LC_ALL=ru_RU.KOI8-R luit gedlnx
      2.2.3: echo "defencoding koi8-r" >~/.golded-screen
-            LC_ALL=ru_RU.KOI8-R screen -c ~/.golded-screen gedlnx
+            screen -c ~/.golded-screen sh -c "LANG=ru_RU.KOI8-R gedlnx"
      3: перекодировать макрокомандой и указать в файлах конфигурации:
      ===========golded.cfg:=============================
      xlatcharset     CP866           UTF-8   866_u8.chs

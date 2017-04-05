@@ -42,4 +42,13 @@ Kubik Installer: 	Блокировать установку в уже сущес
 Kubik SSetting: 	Внесены правки в шаблоны
 Kubik SSetting: 	При перенастройке поинт-комплекта список арий в husky.cfg сохраняется
 SSetting&Installer: Создан механизм обновления с 3.0.x до 3.1.x
+Kubik Send: 		Рефакторинг, отвязал от Kubik_Include_CFGS.pb
+Kubik Send: 		Отказываемся от xml в пользу конфига
+Kubik Params: 		Рефакторинг, отвязал от Kubik_Include_CFGS.pb
+Kubik: 				Удалён Kubik_Include_CFGS.pb
+Kubik SSetting:  	Исправил: не создавался конфиг из шаблона, если не был указан путь для будущего конфига (создать конфиг в той директории, где выполняется приложение)
+Kubik SSetting: 	Обновил шаблон для ge.bat
+Kubik SSetting: 	Создал шаблон для Kubik_Send.ini
+Kubik SSetting:  	Кнопка "Справка" открывает конретную статью
+GoldED: 			Заменён на GoldED+1.1.5 Win32-MSVC  2016 Dec 21 [Compiled using MS Visual C++] 
 ```

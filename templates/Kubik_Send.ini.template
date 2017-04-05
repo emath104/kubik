@@ -1,0 +1,26 @@
+Amount=5
+[1]
+Comment=HTP scan pack
+Program=husky\hpt.exe
+Parameters=-c husky.cfg scan pack
+WorkingDirectory=husky\
+[2]
+Comment=BINKD -cp -P%BOSS_FTN_ADDRESS%
+Program=binkd\binkd.exe
+Parameters=-cp -P%BOSS_FTN_ADDRESS% binkd.cfg
+WorkingDirectory=binkd\
+[3]
+Comment=HTICK toss
+Program=husky\htick.exe
+Parameters=-c husky.cfg toss
+WorkingDirectory=husky\
+[4]
+Comment=HTICK announce
+Program=husky\htick.exe
+Parameters=-c husky.cfg announce
+WorkingDirectory=husky\
+[5]
+Comment=HTP toss link
+Program=husky\hpt.exe
+Parameters=-c husky.cfg toss link
+WorkingDirectory=husky\

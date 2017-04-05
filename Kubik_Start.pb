@@ -83,13 +83,13 @@ Structure Path
   Send.s
   HideSend.s
   Help.s
+  About.s
   KubikFolder.s
   FidoFolder.s
   FTN_Set.s
 EndStructure
 
 Structure Send
-  ;- Обрезка лога
   NotifyMsgsSentOnlyMe.a
   CropLog.a
   NewMsgInfoTosLog.s
@@ -183,6 +183,7 @@ Procedure LoadConfig(path.s)
     \Send        = ReadPreferenceString("Send", "Kubik_Send.exe")
     \HideSend    = ReadPreferenceString("HideSend", "Kubik_Send.exe")
     \FTN_Set     = ReadPreferenceString("FTN_Set", "Kubik_SSetting.exe")
+    \About       = ReadPreferenceString("About", "Kubik_About.exe")
     
     \KubikFolder = ReadPreferenceString("KubikFolder", GetCurrentDirectory())
     \FidoFolder  = ReadPreferenceString("FidoFolder", GetCurrentDirectory() + "fido\")
@@ -1066,7 +1067,7 @@ Repeat
         Case #MenuItem_OpenSSetting
           HideRunProgram(Config\Path\FTN_Set);
         Case #MenuItem_OpenReadMe
-          RunProgram("readme.txt", "", "")
+          RunProgram(Config\Path\About, "", "")
         Case #MenuItem_OpenHelp
           RunProgram(Config\Other\Help, "", "")
         Case #MenuItem_OpenWebSite
@@ -1137,7 +1138,8 @@ EndIf
 
 SaveConfig("Kubik_Set.ini")
 ; IDE Options = PureBasic 5.31 (Windows - x86)
-; CursorPosition = 932
+; CursorPosition = 85
+; FirstLine = 78
 ; Folding = 4v88-v0
 ; EnableXP
 ; UseIcon = icons\128x128\fido.ico

@@ -1,5 +1,5 @@
 ; Kubik SSetting. Автоматизация процесса настройки конф. файлов входящих в поинт-комплект Kubik приложений.
-; Версия 4.1
+; Версия 4.2
 ; (С) 2012-2017 ragweed
 ; PureBasic 5.31
 
@@ -91,6 +91,7 @@ EndStructure
 Structure Other
   Site.s
   Help.s
+  SSettingHelp.s
 EndStructure
 
 Structure FTN
@@ -269,6 +270,7 @@ Procedure LoadConfig(path.s, not_create_config = 0)
   With Config\Other
     \Site = "http://kubik-fido.blogspot.com/"
     \Help = "https://bitbucket.org/ragweed/kubik/wiki/Home"
+    \SSettingHelp = "https://bitbucket.org/ragweed/kubik/wiki/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B8%D0%BD%D1%82-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%82%D0%B0"
   EndWith
   
   PreferenceGroup("FTN")
@@ -429,7 +431,8 @@ EndProcedure
 ; Создаёт из шаблона template.s конфигурационный файл path.s с внесением необходимых изменений
 ; Вернёт 1 в случае успеха, иначе 0
 Procedure CreateConfigFromTemplate(template.s, path.s)
-  If FileSize(GetPathPart(path.s)) <> -2
+
+  If FileSize(GetPathPart(path.s)) <> -2 And Trim(GetPathPart(path.s)) <> ""
     If Not CreateDirectory(GetPathPart(path.s))
       Msg("Не удалось скопировать шаблон " + path.s + ", т.к. директории " + GetPathPart(path.s) + " не существует")
       Msg("Не удалось создать директорию " + GetPathPart(path.s) + " для " + GetFilePart(path.s), #Error)
@@ -461,7 +464,7 @@ Procedure CreateConfigFromTemplate(template.s, path.s)
           KubikShortPath.s = GetShortFileName(KubikPath.s)
           
           ; Определяем текущее расположение почтовых баз.
-          If AltFidoPath = 0
+          If \AltFidoPath = 0
             FidoShortPath.s = KubikShortPath + "fido\"
           Else
             FidoPath.s = \FidoFolder
@@ -672,16 +675,16 @@ Repeat
         Case #Button_Save
           SaveSetting()
         Case #Button_Help
-          RunProgram(Config\Other\Help, "", "")
+          RunProgram(Config\Other\SSettingHelp, "", "")
         Case #Button_Cancel
           Break
       EndSelect
   EndSelect
 Until Event = #PB_Event_CloseWindow
-; IDE Options = PureBasic 5.11 (Windows - x86)
-; CursorPosition = 475
-; FirstLine = 82
-; Folding = Fw-
+; IDE Options = PureBasic 5.31 (Windows - x86)
+; CursorPosition = 677
+; FirstLine = 466
+; Folding = Hz-
 ; EnableXP
 ; UseIcon = icons\32x32\set.ico
 ; Executable = Kubik_SSetting.exe
@@ -692,10 +695,10 @@ Until Event = #PB_Event_CloseWindow
 ; VersionField3 = Kubik
 ; VersionField4 = 2
 ; VersionField5 = 2
-; VersionField6 = Р С™Р С•Р СР С—Р С•Р Р…Р ВµР Р…РЎвЂљ Kubik Modern
+; VersionField6 = Р В Р’В Р РЋРІвЂћСћР В Р’В Р РЋРІР‚СћР В Р’В Р РЋР’ВР В Р’В Р РЋРІР‚вЂќР В Р’В Р РЋРІР‚СћР В Р’В Р В РІР‚В¦Р В Р’В Р вЂ™Р’ВµР В Р’В Р В РІР‚В¦Р В Р Р‹Р Р†Р вЂљРЎв„ў Kubik Modern
 ; VersionField7 = Kubik
 ; VersionField8 = Kubik_SSetting.exe
-; VersionField9 = (Р РЋ) 2013 Kubik Project
+; VersionField9 = (Р В Р’В Р В Р вЂ№) 2013 Kubik Project
 ; VersionField13 = de.j.rabbit@gmail.com
 ; VersionField14 = http://kubik-fido.blogspot.com/
 ; VersionField17 = 0419 Russian

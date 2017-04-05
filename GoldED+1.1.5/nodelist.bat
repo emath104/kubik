@@ -1,1 +1,1 @@
-gncyg.exe -C golded.cfg
+gnwin.exe -C golded.cfg
